@@ -1,0 +1,25 @@
+{
+  "name": "shopify-graphql-zeus-vs-genql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "zeus:front": "rm -rf zeus-front && yarn zeus:front:generate && yarn zeus:front:bundle",
+    "zeus:front:generate": "zeus https://graphql.myshopify.com/api/2021-07/graphql.json ./zeus-front --header=X-Shopify-Storefront-Access-Token:dd4d4dc146542ba7763305d71d1b3d38",
+    "zeus:front:bundle": "yarn esbuild ./zeus-front/zeus/index.ts --bundle --outfile=./zeus-front/bundle.js",
+    "zeus:admin": "rm -rf zeus-admin && yarn zeus:admin:generate && yarn zeus:admin:bundle",
+    "zeus:admin:generate": "zeus https://darkien.myshopify.com/admin/api/2023-01/graphql.json ./zeus-admin --header=X-Shopify-Access-Token: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",
+    "zeus:admin:bundle": "esbuild ./zeus-admin/zeus/index.ts --bundle --outfile=./zeus-admin/bundle.js",
+    "genql:front": "rm -rf genql-front && yarn genql:front:generate && yarn genql:front:bundle",
+    "genql:front:generate": "genql --endpoint https://graphql.myshopify.com/api/2021-07/graphql.json --output ./genql-front -H 'X-Shopify-Storefront-Access-Token:dd4d4dc146542ba7763305d71d1b3d38'",
+    "genql:front:bundle": "yarn esbuild ./genql-front/index.ts --bundle --outfile=./genql-front/bundle.js",
+    "genql:admin": "rm -rf genql-admin && yarn genql:admin:generate && yarn genql:admin:bundle",
+    "genql:admin:generate": "genql --endpoint https://darkien.myshopify.com/admin/api/2023-01/graphql.json --output ./genql-admin -H 'X-Shopify-Access-Token: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'",
+    "genql:admin:bundle": "esbuild ./genql-admin/index.ts --bundle --outfile=./genql-admin/bundle.js"
+  },
+  "devDependencies": {
+    "@genql/cli": "^3.0.3",
+    "esbuild": "^0.17.10",
+    "graphql-zeus": "^5.2.8"
+  }
+}
